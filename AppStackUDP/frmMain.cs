@@ -81,7 +81,11 @@ namespace AppStackUDP
 
         void udp_OnReceiveData(string ip, byte[] data_byte)
         {
-            PrintResult("Receive ["+ ip + "] : " + Encoding.ASCII.GetString(data_byte)+ "\r\n");
+            StringBuilder hex = new StringBuilder(data_byte.Length * 5);
+            foreach (byte b in data_byte)
+                hex.AppendFormat("0x{0:x2} ", b);
+             
+            PrintResult("Receive ["+ ip + "]["+data_byte.Length.ToString()+"] : " + hex.ToString() + "\r\n");
         }
 
         private void tsbtnStartStop_Click(object sender, EventArgs e)
